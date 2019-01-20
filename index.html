@@ -27,28 +27,38 @@
     const players = new Map();
 
     socket.on('draw', (usr) => {
-        let character = PIXI.Sprite.fromImage('/storage/skins/' + usr.info.skin + '.png');
-        character.interactive = true;
-        character.buttonMode = true;
-        character.anchor.set(0.5);
-        character.x = usr.info.x;
-        character.y = usr.info.y;
-        background.addChild(character);
-        players.set(usr.uid, character);
+        queue.push(() => {
+            let character = PIXI.Sprite.fromImage('/storage/skins/' + usr.info.skin + '.png');
+            character.interactive = true;
+            character.buttonMode = true;
+            character.anchor.set(0.5);
+            character.x = usr.info.x;
+            character.y = usr.info.y;
+            background.addChild(character);
+            players.set(usr.uid, character);
+        });
     });
+
+    const queue = [];
+
+    app.ticker.add(() => {
+        while (queue.length > 0)
+            queue.shift()();
+    });
+
     socket.on('move', (usr) => {
         if (!players.has(usr.uid)) location.reload();
         let character = players.get(usr.uid);
-        console.log('move response')
-        character.x = usr.x;
-        character.y = usr.y;
+        queue.push(() => {character.x = usr.x; character.y = usr.y;})
     });
     socket.on('remove', (usr) => {
         if (!players.has(usr)) location.reload();
         let character = players.get(usr);
-        background.removeChild(character);
-        character.destroy({children: true, texture: true, baseTexture: true});
-        players.delete(usr);
+        queue.push(() => {
+            background.removeChild(character);
+            character.destroy({children: true, texture: true, baseTexture: true});
+            players.delete(usr);
+        });
     });
 
     function onClick() {
