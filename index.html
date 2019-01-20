@@ -20,8 +20,8 @@
     let aackground = new PIXI.Sprite(atexture);
     app.stage.addChild(background);
     background.addChild(aackground);
-    aackground.interactive = true;
-    aackground.on('pointerdown', onClick);
+    background.interactive = true;
+    background.on('pointerdown', onClick);
     document.getElementById("game").appendChild(app.view);
 
     const players = new Map();
