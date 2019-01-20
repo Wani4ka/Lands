@@ -38,9 +38,10 @@ const speed = 2;
 
 io.on('connection', (socket) => {
     let id = random_id();
-    players.set(id, {skin: 'character', x: 362, y: 245});
+    io.emit('draw', {uid: id, info: {skin: 'character', x: 362, y: 245}});
     for (let player of players)
         socket.emit('draw', {uid: player[0], info: player[1]});
+    players.set(id, {skin: 'character', x: 362, y: 245});
     let moveId = -1;
     socket.on('move', (pos) => {
         let mx = pos.x;
