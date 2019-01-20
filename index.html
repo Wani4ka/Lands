@@ -49,7 +49,10 @@
     socket.on('move', (usr) => {
         if (!players.has(usr.uid)) location.reload();
         let character = players.get(usr.uid);
-        queue.push(() => {character.x = usr.x; character.y = usr.y;})
+        queue.push(() => {
+            console.log('move request ' + usr.uid);
+            character.x = usr.x; character.y = usr.y;
+        })
     });
     socket.on('remove', (usr) => {
         if (!players.has(usr)) location.reload();
