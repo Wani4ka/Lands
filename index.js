@@ -37,7 +37,7 @@ function dst(x1, y1, x2, y2) {
 const walkSpeed = 0.5;
 
 io.on('connection', (socket) => {
-    let id = random_id();
+    let id = socket.id;
     io.emit('draw', {uid: id, info: {skin: 'character', x: 362, y: 245}});
     for (let player of players)
         socket.emit('draw', {uid: player[0], info: player[1]});
@@ -71,6 +71,7 @@ io.on('connection', (socket) => {
             ++t;
         }, 2);
     });
+
     socket.on('disconnect', () => {
         players.delete(id);
         io.emit('remove', id);
