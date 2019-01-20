@@ -59,7 +59,6 @@
         let character = players.get(usr);
         queue.push(() => {
             background.removeChild(character);
-            character.destroy({texture: true, baseTexture: true});
             console.log('destroy ' + usr);
             players.delete(usr);
         });
