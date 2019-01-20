@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
                 return;
             }
             for (let i = 0; i < fence.length; ++i)
-                if (dst(x0 + vx * t, y0 + vy * t, fence[i][0], fence[i][1]) < 5) {
+                if (dst(x0 + vx * t, y0 + vy * t, fence[i][0], fence[i][1]) < 3) {
                     clearInterval(moveId);
                     moveId = -1;
                     return;

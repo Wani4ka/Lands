@@ -39,6 +39,7 @@
     socket.on('move', (usr) => {
         if (!players.has(usr.uid)) location.reload();
         let character = players.get(usr.uid);
+        console.log('move response')
         character.x = usr.x;
         character.y = usr.y;
     });
@@ -51,6 +52,7 @@
     });
 
     function onClick() {
+        console.log('click request');
         socket.emit('move', {x: app.renderer.plugins.interaction.mouse.global.x, y: app.renderer.plugins.interaction.mouse.global.y});
     }
 </script>
