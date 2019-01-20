@@ -1,0 +1,30 @@
+{
+  "name": "Wani4ka Lands",
+  "version": "0.3.0",
+  "description": "Shararam HTML5 version",
+  "engines": {
+    "node": "10.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wani4ka/Lands"
+  },
+  "keywords": [
+    "Wani4ka",
+    "Shararam",
+    "Smeshariki"
+  ],
+  "license": "MIT"
+}

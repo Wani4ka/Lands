@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+
+</head>
+<script src="pixi.min.js"></script>
+<body>
+<div id="game" style="position:absolute; width:765px; height:491px; left:50%; top:50%; margin-left:-382.5px; margin-top:-245.5px;"></div>
+<script type="text/javascript">
+
+    let character = PIXI.Sprite.fromImage('character.png');
+    let fence = [];
+    let mx = character.x;
+    let my = character.y;
+    let x0 = character.x;
+    let y0 = character.y;
+    let time = 0;
+    let t = 0;
+    let vx = 0;
+    let vy = 0;
+    const speed = 2;
+
+    let app = new PIXI.Application({width: 765, height: 491});
+
+    function loadFence() {
+        let request = new XMLHttpRequest();
+        request.open('GET', 'DiscoLocationBorders.txt', true);
+        request.send(null);
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                const type = request.getResponseHeader('Content-Type');
+                if (type.indexOf("text") !== 1) {
+                    let inp = request.responseText.split(' ');
+                    for (let i = 0; i < inp.length; i += 2)
+                        fence.push([parseInt(inp[i]), parseInt(inp[i+1])]);
+                    app.ticker.add(function(delta) {
+                        if (t < time) {
+                            for (let i = 0; i < fence.length; ++i) {
+                                if (dst(x0 + vx * t, y0 + vy * t, fence[i][0], fence[i][1]) < 5) {
+                                    t = time;
+                                    return;
+                                }
+                            }
+                            character.x = x0 + vx * t;
+                            character.y = y0 + vy * t;
+                            t += delta;
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    loadFence();
+
+    let btexture = PIXI.Texture.fromImage('DiscoLocation.png');
+    let background = new PIXI.Sprite(btexture);
+    background.interactive = true;
+    background.buttonMode = true;
+    let atexture = PIXI.Texture.fromImage('DiscoLocationTop.png');
+    let aackground = new PIXI.Sprite(atexture);
+    aackground.interactive = true;
+    aackground.buttonMode = true;
+    app.stage.addChild(background);
+    character.anchor.set(0.5);
+    character.x = app.screen.width / 2;
+    character.y = app.screen.height / 2;
+    background.addChild(character);
+    background.addChild(aackground);
+    background.on('pointerdown', onClick);
+    aackground.on('pointerdown', onClick);
+    document.getElementById("game").appendChild(app.view);
+
+    function dst(x1, y1, x2, y2) {
+        return Math.sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
+    }
+
+    function onClick() {
+            mx = app.renderer.plugins.interaction.mouse.global.x;
+            my = app.renderer.plugins.interaction.mouse.global.y;
+            x0 = character.x;
+            y0 = character.y;
+            t = 0;
+            time = Math.sqrt((mx - x0) * (mx - x0) + (my - y0) * (my - y0)) / speed;
+            vx = (mx - x0) / time;
+            vy = (my - y0) / time;
+    }
+</script>
+</body>
+</html>

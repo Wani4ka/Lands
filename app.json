@@ -1,0 +1,8 @@
+{
+  "name": "Wani4ka Lands",
+  "description": "Shararam HTML5 version.",
+  "repository": "https://github.com/Wani4ka/Lands",
+  "logo": "",
+  "keywords": ["wani4ka", "shararam", "smeshariki"],
+  "image": "heroku/nodejs"
+}
