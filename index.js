@@ -29,32 +29,47 @@ fs.readFile(__dirname + '/locations/disco/borders.txt', 'utf8', (err, data) => {
     console.log(fence.length)
 });
 
+
+function dst(x1, y1, x2, y2) {
+    return Math.sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
+}
+
 const speed = 2;
 
 io.on('connection', (socket) => {
     let id = random_id();
     players.set(id, {skin: 'character', x: 362, y: 245});
-    socket.emit('auth', id);
-    io.emit('draw', {uid: id, info: players.get(id)});
+    for (let player of players)
+        socket.emit('draw', {uid: player[0], info: player[1]});
     let moveId = -1;
     socket.on('move', (pos) => {
         let mx = pos.x;
-        my = pos.y;
-        x0 = players.get(id).x;
-        y0 = players.get(id).y;
-        t = 0;
-        time = Math.sqrt((mx - x0) * (mx - x0) + (my - y0) * (my - y0)) / speed;
-        vx = (mx - x0) / time;
-        vy = (my - y0) / time;
+        let my = pos.y;
+        let x0 = players.get(id).x;
+        let y0 = players.get(id).y;
+        let t = 0;
+        let time = dst(x0, y0, mx, my) / speed;
+        let vx = (mx - x0) / time;
+        let vy = (my - y0) / time;
         if (moveId !== -1) clearInterval(moveId);
         moveId = setInterval(() => {
             if (t >= time) {
                 clearInterval(moveId);
+                moveId = -1;
                 return;
             }
-
+            for (let i = 0; i < fence.length; ++i)
+                if (dst(x0 + vx * t, y0 + vy * t, fence[i][0], fence[i][1]) < 5) {
+                    clearInterval(moveId);
+                    moveId = -1;
+                    return;
+                }
+                io.emit('move', {uid: id, x: x0 + vx * t, y: y0 + vy * t});
         }, 50);
-        io.emit('move', {uid: id})
+    });
+    socket.on('disconnect', () => {
+        players.remove(id);
+        io.emit('remove', id);
     });
 });
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
