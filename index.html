@@ -34,7 +34,9 @@
             character.anchor.set(0.5);
             character.x = usr.info.x;
             character.y = usr.info.y;
+            background.removeChild(aackground);
             background.addChild(character);
+            background.addChild(aackground);
             players.set(usr.uid, character);
         });
     });
