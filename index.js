@@ -25,7 +25,7 @@ function dst(x1, y1, x2, y2) {
     return Math.sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
 }
 
-const walkSpeed = 0.5;
+const walkSpeed = parseFloat(process.env.WALK_SPEED);
 
 io.on('connection', (socket) => {
     let id = socket.id;
@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
             players.get(id).y = y0 + vy * t;
             io.emit('move', {uid: id, x: players.get(id).x, y: players.get(id).y});
             ++t;
-        }, 3);
+        }, parseInt(process.env.TICK_PERIOD));
     });
 
     socket.on('disconnect', () => {
