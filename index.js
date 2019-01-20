@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
         }, 2);
     });
     socket.on('disconnect', () => {
-        players.remove(id);
+        players.delete(id);
         io.emit('remove', id);
     });
 });
