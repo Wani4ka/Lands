@@ -16,12 +16,12 @@
     let app = new PIXI.Application({width: 765, height: 491});
     let btexture = PIXI.Texture.fromImage('/storage/png/DiscoLocation.png');
     let background = new PIXI.Sprite(btexture);
-    background.interactive = true;
     let atexture = PIXI.Texture.fromImage('/storage/png/DiscoLocationTop.png');
     let aackground = new PIXI.Sprite(atexture);
     app.stage.addChild(background);
     background.addChild(aackground);
-    background.on('pointerdown', onClick);
+    aackground.interactive = true;
+    aackground.on('pointerdown', onClick);
     document.getElementById("game").appendChild(app.view);
 
     const players = new Map();
