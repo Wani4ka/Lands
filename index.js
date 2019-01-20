@@ -20,10 +20,16 @@ function random_id() {
 const players = new Map();
 
 const fence = [];
-fs.readFile(__dirname + '/locations/disco/borders.txt', (err, data) => {
+
+fs.readFile(__dirname + '/locations/disco/borders.txt', 'utf8', (err, data) => {
     if (err) throw err;
-    console.log(data);
+    let inp = data.split(' ');
+    for (let i = 0; i < inp.length; i += 2)
+        fence.push([parseInt(inp[i]), parseInt(inp[i+1])]);
+    console.log(fence.length)
 });
+
+const speed = 2;
 
 io.on('connection', (socket) => {
     let id = random_id();
