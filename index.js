@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
             players.get(id).y = y0 + vy * t;
             io.emit('move', {uid: id, x: players.get(id).x, y: players.get(id).y});
             ++t;
-        }, 2);
+        }, 3);
     });
 
     socket.on('disconnect', () => {
