@@ -5,12 +5,12 @@
     <title>Hello World</title>
 
 </head>
-<script src="pixi.min.js"></script>
+<script src="/storage/js/pixi.min.js"></script>
 <body>
 <div id="game" style="position:absolute; width:765px; height:491px; left:50%; top:50%; margin-left:-382.5px; margin-top:-245.5px;"></div>
 <script type="text/javascript">
 
-    let character = PIXI.Sprite.fromImage('character.png');
+    let character = PIXI.Sprite.fromImage('/storage/png/character.png');
     let fence = [];
     let mx = character.x;
     let my = character.y;
@@ -26,7 +26,7 @@
 
     function loadFence() {
         let request = new XMLHttpRequest();
-        request.open('GET', 'DiscoLocationBorders.txt', true);
+        request.open('GET', '/storage/misc/DiscoLocationBorders.txt', true);
         request.send(null);
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
@@ -55,11 +55,11 @@
 
     loadFence();
 
-    let btexture = PIXI.Texture.fromImage('DiscoLocation.png');
+    let btexture = PIXI.Texture.fromImage('/storage/png/DiscoLocation.png');
     let background = new PIXI.Sprite(btexture);
     background.interactive = true;
     background.buttonMode = true;
-    let atexture = PIXI.Texture.fromImage('DiscoLocationTop.png');
+    let atexture = PIXI.Texture.fromImage('/storage/png/DiscoLocationTop.png');
     let aackground = new PIXI.Sprite(atexture);
     aackground.interactive = true;
     aackground.buttonMode = true;
