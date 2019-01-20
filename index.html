@@ -81,6 +81,7 @@
     }
 
     function onClick() {
+        socket.emit('move', {x: app.renderer.plugins.interaction.mouse.global.x, y: app.renderer.plugins.interaction.mouse.global.y});
             mx = app.renderer.plugins.interaction.mouse.global.x;
             my = app.renderer.plugins.interaction.mouse.global.y;
             x0 = character.x;

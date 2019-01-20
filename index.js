@@ -9,7 +9,8 @@ app
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    socket.on('move', (pos) => {
+        console.log('requested move to ' + pos.x + ' ' + pos.y);
+    });
 });
-
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
