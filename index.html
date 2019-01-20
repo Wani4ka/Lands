@@ -49,9 +49,11 @@
     socket.on('move', (usr) => {
         if (!players.has(usr.uid)) location.reload();
         let character = players.get(usr.uid);
+        const x = usr.x;
+        const y = usr.y;
         queue.push(() => {
-            character.x = usr.x;
-            character.y = usr.y;
+            character.x = x;
+            character.y = y;
             console.log(character.x + ' ' + character.y);
         })
     });
