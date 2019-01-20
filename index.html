@@ -59,7 +59,7 @@
         let character = players.get(usr);
         queue.push(() => {
             background.removeChild(character);
-            character.destroy({children: true, texture: true, baseTexture: true});
+            character.destroy({texture: true, baseTexture: true});
             players.delete(usr);
         });
     });

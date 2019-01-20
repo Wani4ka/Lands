@@ -8,15 +8,6 @@ const io = require('socket.io')(http);
 app
   .get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
-
-function random_id() {
-    const alphabet = '0123456789';
-    let ans = '';
-    for (let i = 0; i < 10; ++i)
-        ans += alphabet[Math.round(Math.random() * 10)];
-    return ans;
-}
-
 const players = new Map();
 
 const fence = [];
