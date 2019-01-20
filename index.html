@@ -6,9 +6,12 @@
 
 </head>
 <script src="/storage/js/pixi.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <body>
 <div id="game" style="position:absolute; width:765px; height:491px; left:50%; top:50%; margin-left:-382.5px; margin-top:-245.5px;"></div>
 <script type="text/javascript">
+
+    const socket = new io();
 
     let character = PIXI.Sprite.fromImage('/storage/png/character.png');
     let fence = [];
