@@ -65,7 +65,8 @@ io.on('connection', (socket) => {
                     moveId = -1;
                     return;
                 }
-                io.emit('move', {uid: id, x: x0 + vx * t, y: y0 + vy * t});
+            io.emit('move', {uid: id, x: x0 + vx * t, y: y0 + vy * t});
+            ++t;
         }, 50);
     });
     socket.on('disconnect', () => {
