@@ -11,12 +11,9 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "latest"
   },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/Wani4ka/Lands"
