@@ -34,7 +34,7 @@ function dst(x1, y1, x2, y2) {
     return Math.sqrt((x2-x1) * (x2-x1) + (y2-y1) * (y2-y1));
 }
 
-const speed = 0.5;
+const walkSpeed = 0.5;
 
 io.on('connection', (socket) => {
     let id = random_id();
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
         let x0 = players.get(id).x;
         let y0 = players.get(id).y;
         let t = 0;
-        let time = dst(x0, y0, mx, my) / speed;
+        let time = dst(x0, y0, mx, my) / walkSpeed;
         let vx = (mx - x0) / time;
         let vy = (my - y0) / time;
         if (moveId !== -1) clearInterval(moveId);

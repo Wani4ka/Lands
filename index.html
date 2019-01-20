@@ -49,12 +49,9 @@
     socket.on('move', (usr) => {
         if (!players.has(usr.uid)) location.reload();
         let character = players.get(usr.uid);
-        const x = usr.x;
-        const y = usr.y;
         queue.push(() => {
-            character.x = x;
-            character.y = y;
-            console.log(character.x + ' ' + character.y);
+            character.x = usr.x;
+            character.y = usr.y;
         })
     });
     socket.on('remove', (usr) => {
@@ -68,7 +65,6 @@
     });
 
     function onClick() {
-        console.log('click request');
         socket.emit('move', {x: app.renderer.plugins.interaction.mouse.global.x, y: app.renderer.plugins.interaction.mouse.global.y});
     }
 </script>
