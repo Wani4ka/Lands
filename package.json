@@ -1,5 +1,5 @@
 {
-  "name": "Wani4ka Lands",
+  "name": "Wani4kaLands",
   "version": "0.3.0",
   "description": "Shararam HTML5 version",
   "engines": {
@@ -11,7 +11,7 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "express": "latest"
+    "express": "^4.16.4"
   },
   "devDependencies": {},
   "repository": {
