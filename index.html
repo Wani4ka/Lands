@@ -50,8 +50,9 @@
         if (!players.has(usr.uid)) location.reload();
         let character = players.get(usr.uid);
         queue.push(() => {
-            console.log('move request ' + usr.uid);
-            character.x = usr.x; character.y = usr.y;
+            character.x = usr.x;
+            character.y = usr.y;
+            console.log(character.x + ' ' + character.y);
         })
     });
     socket.on('remove', (usr) => {
