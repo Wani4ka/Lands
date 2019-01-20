@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
             }
 
         }, 50);
-        io.emit('move', {uid: id, x: })
+        io.emit('move', {uid: id})
     });
 });
 http.listen(PORT, () => console.log(`Listening on ${ PORT }`));
