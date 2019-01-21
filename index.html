@@ -59,6 +59,11 @@
         });
     });
 
+    socket.on('disconnect', () => {
+        alert('Потеряно соединение с сервером.');
+        location.reload();
+    });
+
     socket.on('chat', (msg) => {
         alert(msg);
     });
