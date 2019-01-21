@@ -24,10 +24,10 @@
     let app = new PIXI.Application({width: 765, height: 491});
     let btexture = PIXI.Texture.fromImage('/storage/png/YardLocation.png');
     let background = new PIXI.Sprite(btexture);
-    //let atexture = PIXI.Texture.fromImage('/storage/png/DiscoLocationTop.png');
-    //let aackground = new PIXI.Sprite(atexture);
+    let atexture = PIXI.Texture.fromImage('/storage/png/YardLocationTop.png');
+    let aackground = new PIXI.Sprite(atexture);
     app.stage.addChild(background);
-    //background.addChild(aackground);
+    background.addChild(aackground);
     background.interactive = true;
     background.on('pointerdown', onClick);
     document.getElementById("game").appendChild(app.view);
@@ -42,9 +42,9 @@
             character.anchor.set(0.5);
             character.x = usr.info.x;
             character.y = usr.info.y;
-           // background.removeChild(aackground);
+            background.removeChild(aackground);
             background.addChild(character);
-            //background.addChild(aackground);
+            background.addChild(aackground);
             players.set(usr.uid, character);
         });
     });
