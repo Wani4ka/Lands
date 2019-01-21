@@ -92,7 +92,7 @@
             players.delete(usr);
         });
     });
-    socket.on('error', (msg) => {
+    socket.on('err', (msg) => {
         alert(msg);
         location.reload();
     });

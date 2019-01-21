@@ -39,10 +39,10 @@ io.on('connection', (socket) => {
             obj = JSON.parse(res);
             id = obj['response'][0]['first_name'] + ' ' + obj['response'][0]['last_name'];
         } catch (err) {
-            socket.emit('error', err.message);
+            socket.emit('err', err.message);
         }
         if (players.has(id)) {
-            socket.emit('error', 'Кто-то уже играет от Вашего имени!');
+            socket.emit('err', 'Кто-то уже играет от Вашего имени!');
             return;
         }
         socket.emit('auth', 'ok');
