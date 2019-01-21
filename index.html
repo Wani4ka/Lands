@@ -8,18 +8,13 @@
 <script src="/storage/js/pixi.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <body>
-<div id="game" style="position:absolute; width:765px; height:491px; left:50%; top:50%; margin-left:-382.5px; margin-top:-245.5px; z-index:1"></div>
-<div style="background-color:cadetblue; margin-top: -700px; z-index:2">
-    <input type="text" id="chat" maxlength="128">
-</div>
+    <div id="game" style="position:absolute; width:765px; height:491px; left:50%; top:50%; margin-left:-382.5px; margin-top:-245.5px; z-index:1; background: black"></div>
+    <div style="position:absolute; background:red; width: 765px; left:50%; top:50%; margin-left:-382.5px; margin-top: 216px; height: 30px; z-index:2">
+        <input type="text" id="chat" style="height: 30px; width: 100%" maxlength="128">
+    </div>
 <script type="text/javascript">
 
     const socket = new io();
-
-    document.getElementById('chat').onsubmit = () => {
-        socket.emit('chat', document.getElementById('chat').value);
-        document.getElementById('chat').value = '';
-    };
 
     let app = new PIXI.Application({width: 765, height: 491});
     let btexture = PIXI.Texture.fromImage('/storage/png/DiscoLocation.png');
@@ -81,6 +76,14 @@
     function onClick() {
         socket.emit('move', {x: app.renderer.plugins.interaction.mouse.global.x, y: app.renderer.plugins.interaction.mouse.global.y});
     }
+
+    document.getElementById('chat').addEventListener('keyup', (e) => {
+        e.preventDefault();
+        if (e.key === 'Enter') {
+            socket.emit('chat', document.getElementById('chat').value);
+            document.getElementById('chat').value = '';
+        }
+    });
 </script>
 </body>
 </html>
