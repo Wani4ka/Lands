@@ -12,7 +12,7 @@ const players = new Map();
 
 const fence = [];
 
-fs.readFile(__dirname + '/locations/disco/borders.txt', 'utf8', (err, data) => {
+fs.readFile(__dirname + '/locations/yard/borders.txt', 'utf8', (err, data) => {
     if (err) throw err;
     let inp = data.split(' ');
     for (let i = 0; i < inp.length; i += 2)
@@ -29,10 +29,10 @@ const walkSpeed = parseFloat(process.env.WALK_SPEED);
 
 io.on('connection', (socket) => {
     let id = socket.id;
-    io.emit('draw', {uid: id, info: {skin: 'character', x: 362, y: 245}});
+    io.emit('draw', {uid: id, info: {skin: 'character', x: 385, y: 385}});
     for (let player of players)
         socket.emit('draw', {uid: player[0], info: player[1]});
-    players.set(id, {skin: 'character', x: 362, y: 245});
+    players.set(id, {skin: 'character', x: 385, y: 385});
     let moveId = -1;
     socket.on('move', (pos) => {
         let mx = pos.x;
