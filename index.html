@@ -77,6 +77,10 @@
             players.delete(usr);
         });
     });
+    socket.on('error', (msg) => {
+        alert(msg);
+        location.reload();
+    });
 
     function onClick() {
         socket.emit('move', {x: app.renderer.plugins.interaction.mouse.global.x, y: app.renderer.plugins.interaction.mouse.global.y});
@@ -89,7 +93,7 @@
             document.getElementById('chat').value = '';
         }
     });
-    alert(window.location.href);
+    socket.emit('auth', new URL(window.location.href).searchParams.get("api_result"));
 </script>
 </body>
 </html>
