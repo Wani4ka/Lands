@@ -1,13 +1,13 @@
 const express = require('express');
 const fs = require("fs");
-const app = express();
+const exp = express();
 const PORT = process.env.PORT || 5000;
-const http = require('http').Server(app);
+const http = require('http').Server(exp);
 const io = require('socket.io')(http);
 const Vk = require('vk-node-sdk');
 const app = new Vk.App(process.env.APP_TOKEN);
 
-app
+exp
   .get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 const players = new Map();
