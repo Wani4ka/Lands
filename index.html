@@ -49,12 +49,12 @@
             character.anchor.set(0.5);
             character.x = usr.info.x;
             character.y = usr.info.y;
-            let text = new PIXI.Text(usr.uid, new PIXI.TextStyle({fonstSize: parseInt(process.env.NICKNAME_TEXT_SIZE)}));
+            let text = new PIXI.Text(usr.uid, new PIXI.TextStyle({fonstSize: 6}));
             background.removeChild(aackground);
             background.addChild(character);
             character.addChild(text);
-            text.x = parseFloat(process.env.NICKNAME_X);
-            text.y = parseFloat(process.env.NICKNAME_Y);
+            text.x = -10;
+            text.y = 10;
             background.addChild(aackground);
             players.set(usr.uid, character);
         });
