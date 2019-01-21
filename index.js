@@ -32,7 +32,6 @@ io.on('connection', (socket) => {
     socket.on('auth', (res) => {
         let obj;
         try {
-            io.emit('chat', res);
             obj = JSON.parse(res);
             id = obj['response'][0]['first_name'] + ' ' + obj['response'][0]['last_name'];
         } catch (err) {
