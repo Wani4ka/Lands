@@ -46,7 +46,7 @@
             let character = PIXI.Sprite.fromImage('/storage/skins/' + usr.info.skin + '.png');
             character.interactive = true;
             character.buttonMode = true;
-            character.anchor.set(0.5);
+            character.anchor.set(0.5, 1);
             character.x = usr.info.x;
             character.y = usr.info.y;
             let text = new PIXI.Text(usr.uid, new PIXI.TextStyle({fontSize: 12}));
