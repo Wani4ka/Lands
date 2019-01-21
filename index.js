@@ -8,7 +8,7 @@ const Vk = require('vk-node-sdk');
 const app = new Vk.App(process.env.APP_TOKEN);
 
 exp
-  .get('/', (req, res) => {res.sendFile(__dirname + '/index.html'))
+  .get('/', (req, res) => res.sendFile(__dirname + '/index.html')
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 const players = new Map();
 
