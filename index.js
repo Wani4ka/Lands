@@ -37,6 +37,7 @@ io.on('connection', (socket) => {
     socket.on('move', (pos) => {
         let mx = pos.x;
         let my = pos.y;
+        if (mx > 765 || my > 491 || mx < 0 || my < 0) return;
         let x0 = players.get(id).x;
         let y0 = players.get(id).y;
         let t = 0;
