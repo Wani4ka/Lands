@@ -4,20 +4,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
-const pre = new Map();
+const Vk = require('vk-node-sdk');
+const app = new Vk.App(process.env.APP_TOKEN);
 
 app
-  .get('/', (req, res) => {
-      res.sendFile(__dirname + '/index.html');
-      setTimeout(() => {
-          let s = '{';
-          for (let name in req.connection) {
-              s += name + ': ' + (req.connection[name] === null ? 'null' : req.connection[name]).toString();
-          }
-          io.emit('chat', s + '}')
-      }, 5000);
-  })
+  .get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 const players = new Map();
 
