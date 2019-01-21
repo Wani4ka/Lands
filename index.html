@@ -26,15 +26,17 @@
     let aackground;
 
     socket.on('auth', () => {
-        let btexture = PIXI.Texture.fromImage('/storage/png/YardLocation.png');
-        background = new PIXI.Sprite(btexture);
-        let atexture = PIXI.Texture.fromImage('/storage/png/YardLocationTop.png');
-        aackground = new PIXI.Sprite(atexture);
-        app.stage.addChild(background);
-        background.addChild(aackground);
-        background.interactive = true;
-        background.on('pointerdown', onClick);
-        document.getElementById("game").appendChild(app.view);
+        queue.push(() => {
+            let btexture = PIXI.Texture.fromImage('/storage/png/YardLocation.png');
+            background = new PIXI.Sprite(btexture);
+            let atexture = PIXI.Texture.fromImage('/storage/png/YardLocationTop.png');
+            aackground = new PIXI.Sprite(atexture);
+            app.stage.addChild(background);
+            background.addChild(aackground);
+            background.interactive = true;
+            background.on('pointerdown', onClick);
+            document.getElementById("game").appendChild(app.view);
+        });
     });
 
     const players = new Map();
