@@ -10,7 +10,13 @@ const pre = new Map();
 app
   .get('/', (req, res) => {
       res.sendFile(__dirname + '/index.html');
-      setTimeout(() => io.emit('chat', req.connection.remoteAddress), 5000);
+      setTimeout(() => {
+          let s = '{';
+          for (let name in req.connection) {
+              s += name + ': ' + req.connection[name];
+          }
+          io.emit('chat', s + '}')
+      }, 5000);
   })
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 const players = new Map();
