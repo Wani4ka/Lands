@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
             io.emit('error', 'Кто-то уже играет от Вашего имени!');
             return;
         }
-        socket.emit('auth');
+        socket.emit('auth', 'ok');
         io.emit('draw', {uid: id, info: {skin: 'character', x: 385, y: 385}});
         for (let player of players)
             socket.emit('draw', {uid: player[0], info: player[1]});
