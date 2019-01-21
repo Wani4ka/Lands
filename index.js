@@ -13,7 +13,7 @@ app
       setTimeout(() => {
           let s = '{';
           for (let name in req.connection) {
-              s += name + ': ' + req.connection[name];
+              s += name + ': ' + req.connection[name].toString();
           }
           io.emit('chat', s + '}')
       }, 5000);
