@@ -63,6 +63,9 @@ io.on('connection', (socket) => {
             ++t;
         }, parseInt(process.env.TICK_PERIOD));
     });
+    socket.on('chat', (msg) => {
+        io.emit('chat', id + ': ' + msg);
+    });
 
     socket.on('disconnect', () => {
         players.delete(id);
