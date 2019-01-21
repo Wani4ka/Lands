@@ -6,7 +6,11 @@ const http = require('http').Server(exp);
 const io = require('socket.io')(http);
 
 exp
-  .get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
+  .get('/', (req, res) => {
+      if (req.params.api_result === undefined)
+          res.sendFile(__dirname + '/vk.html');
+      else res.sendFile(__dirname + '/index.html')
+  })
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 const players = new Map();
 
@@ -37,6 +41,11 @@ io.on('connection', (socket) => {
         } catch (err) {
             io.emit('error', err.message);
         }
+        if (players.has(id)) {
+            io.emit('error', 'Кто-то уже играет от Вашего имени!');
+            return;
+        }
+        socket.emit('auth');
         io.emit('draw', {uid: id, info: {skin: 'character', x: 385, y: 385}});
         for (let player of players)
             socket.emit('draw', {uid: player[0], info: player[1]});

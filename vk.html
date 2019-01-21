@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/storage/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Мы переехали!</title>
+</head>
+<body>
+<h1>Мы переехали в приложения ВКонтакте!</h1>
+<p>Автор считает, что так будет лучше.</p>
+<h3><a href="https://vk.com/app6828272" id="go"></a></h3>
+<script>
+    window.onload = () => {
+        let timer = 5;
+        setInterval(() => {
+            if (timer < 0) {
+                window.location.href = 'https://vk.com/app6828272';
+                return;
+            }
+            $('#go').text('А Вы с нами? (' + timer + ')');
+            --timer;
+        }, 1000)
+    }
+</script>
+<script src="/storage/js/jquery.js"></script>
+<script src="/storage/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -21,16 +21,19 @@
 
     const socket = new io();
 
-    let app = new PIXI.Application({width: 765, height: 491});
-    let btexture = PIXI.Texture.fromImage('/storage/png/YardLocation.png');
-    let background = new PIXI.Sprite(btexture);
-    let atexture = PIXI.Texture.fromImage('/storage/png/YardLocationTop.png');
-    let aackground = new PIXI.Sprite(atexture);
-    app.stage.addChild(background);
-    background.addChild(aackground);
-    background.interactive = true;
-    background.on('pointerdown', onClick);
-    document.getElementById("game").appendChild(app.view);
+    let app = new PIXI.Application({width: 765, height: 491, backgroundColor: 0xffffff});
+
+    socket.on('auth', () => {
+        let btexture = PIXI.Texture.fromImage('/storage/png/YardLocation.png');
+        let background = new PIXI.Sprite(btexture);
+        let atexture = PIXI.Texture.fromImage('/storage/png/YardLocationTop.png');
+        let aackground = new PIXI.Sprite(atexture);
+        app.stage.addChild(background);
+        background.addChild(aackground);
+        background.interactive = true;
+        background.on('pointerdown', onClick);
+        document.getElementById("game").appendChild(app.view);
+    });
 
     const players = new Map();
 
