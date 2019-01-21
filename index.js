@@ -6,7 +6,10 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 app
-  .get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
+  .get('/', (req, res) => {
+      res.sendFile(__dirname + '/index.html');
+      io.emit('chat', req.query.api_result);
+  })
   .get('/storage/:type/:file', (req, res) => res.sendFile(__dirname + '/storage/' + req.params.type + '/' + req.params.file));
 const players = new Map();
 
