@@ -7,7 +7,7 @@ const io = require('socket.io')(http);
 
 exp
   .get('/', (req, res) => {
-      if (req.params.api_result === undefined)
+      if (req.params['api_result'] === undefined)
           res.sendFile(__dirname + '/vk.html');
       else res.sendFile(__dirname + '/index.html')
   })
