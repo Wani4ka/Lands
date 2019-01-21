@@ -49,8 +49,10 @@
             character.anchor.set(0.5);
             character.x = usr.info.x;
             character.y = usr.info.y;
+            let text = new PIXI.Text(usr.uid);
             background.removeChild(aackground);
             background.addChild(character);
+            character.addChild(text);
             background.addChild(aackground);
             players.set(usr.uid, character);
         });
