@@ -49,10 +49,12 @@
             character.anchor.set(0.5);
             character.x = usr.info.x;
             character.y = usr.info.y;
-            let text = new PIXI.Text(usr.uid);
+            let text = new PIXI.Text(usr.uid, new PIXI.TextStyle({fonstSize: 12}));
             background.removeChild(aackground);
             background.addChild(character);
             character.addChild(text);
+            text.x = -10;
+            text.y = 10;
             background.addChild(aackground);
             players.set(usr.uid, character);
         });
