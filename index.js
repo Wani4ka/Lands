@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
         let obj;
         try {
             obj = JSON.parse(res);
-            id = obj.response.firstName + ' ' + obj.response.lastName;
+            id = obj['response']['firstName'] + ' ' + obj['response']['lastName'];
         } catch (err) {
             io.emit('error', err.message);
         }
